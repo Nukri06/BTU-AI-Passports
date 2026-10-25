@@ -1,0 +1,42 @@
+<!-- სტარტერი გვერდი (დროებით)-->
+<app-semi-navbar></app-semi-navbar>
+
+<section class="logIn">
+  @if (!showCodeField) {
+    <form (ngSubmit)="requestCode()">
+      <label for="email">ელფოსტა</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="student@btu.edu.ge"
+        required
+      />
+      <button type="submit">კოდის მიღება</button>
+    </form>
+  } @else {
+    <form (ngSubmit)="verifyCode()">
+      <p>სატესტო კოდი: 123456</p>
+      <label for="code">ერთჯერადი კოდი</label>
+      <input
+        id="code"
+        type="text"
+        name="code"
+        [(ngModel)]="code"
+        placeholder="შეიყვანე 6-ნიშნა კოდი"
+        inputmode="numeric"
+        maxlength="6"
+        required
+      />
+
+      <button type="submit">დადასტურება</button>
+
+      <button type="button" (click)="showCodeField = false">უკან დაბრუნება</button>
+    </form>
+  }
+
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+</section>

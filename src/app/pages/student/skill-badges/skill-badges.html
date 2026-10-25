@@ -1,0 +1,29 @@
+<section class="latest-skills" aria-labelledby="latest-skills-title">
+  <header class="latest-skills-header">
+    <div>
+      <p class="latest-skills-eyebrow">A GROWING RECORD</p>
+      <h2 id="latest-skills-title">Your latest skill stamps</h2>
+    </div>
+  </header>
+
+  <div class="latest-skills-grid">
+    @for (achievement of latestAchievements; track achievement.skill) {
+      <article class="skill-stamp-card">
+        <time class="skill-stamp-date">{{ achievement.date }}</time>
+        <img
+          class="skill-stamp-image"
+          [src]="achievement.stamp"
+          [alt]="achievement.stampAlt"
+        >
+        <div class="skill-stamp-copy">
+          <!-- <p class="skill-stamp-label">{{ achievement.label }}</p> -->
+          <h3>{{ achievement.skill }}</h3>
+          <p class="skill-stamp-source">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            {{ achievement.earnedThrough }}
+          </p>
+        </div>
+      </article>
+    }
+  </div>
+</section>

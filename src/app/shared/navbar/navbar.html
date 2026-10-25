@@ -1,0 +1,28 @@
+<nav class="navbar" aria-label="Main navigation">
+  <div class="part1">
+    <a class="brand" [routerLink]="homeRoute" aria-label="BTU AI Skills Passport home">
+      <img src="/BTU-logo.png" alt="BTU" />
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-name">AI Skills<br />Digital Passport</span>
+    </a>
+
+    <form class="passport-search" role="search" (submit)="$event.preventDefault()">
+      <label class="visually-hidden" for="passport-search">Search passports by student ID</label>
+      <input id="passport-search" type="search" placeholder="სტუდენტის ID" autocomplete="off" />
+      <button type="submit" aria-label="ძიება">ძიება</button>
+    </form>
+  </div>
+
+  <div class="part2">
+    <div class="language-switch" aria-label="ენის არჩევა">
+      <button type="button" aria-pressed="true">ქარ</button>
+      <button type="button" class="language-active" aria-pressed="false">EN</button>
+    </div>
+
+    @if (authSession.isSignedIn()) {
+      <button class="login-link" type="button" (click)="logOut()">Log Out</button>
+    } @else {
+      <a class="login-link" routerLink="/login">Log In</a>
+    }
+  </div>
+</nav>

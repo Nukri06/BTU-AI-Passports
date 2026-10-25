@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+<div class="admin-panel">
+
+  <!-- მარცხენა მენიუ -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <span class="brand-icon">⬡</span>
+      <h2>BTU Passport</h2>
+    </div>
+
+    <div class="role-label">Super admin</div>
+
+    <nav class="navigation">
+      <a class="nav-item active" href="javascript:void(0)">
+        <span>▦</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a class="nav-item" href="javascript:void(0)">
+        <span>♟</span>
+        <span>Issue stamps</span>
+      </a>
+
+      <a class="nav-item" href="javascript:void(0)">
+        <span>♧</span>
+        <span>Students</span>
+      </a>
+
+      <a class="nav-item" href="javascript:void(0)">
+        <span>♛</span>
+        <span>Administrators</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <span>Stamps issued</span>
+      <strong>0</strong>
+    </div>
+
+  </aside>
+
+  <!-- მთავარი შიგთავსი -->
+  <main class="main-content">
+
+    <h1>Overview</h1>
+
+    <!-- სტატისტიკის ბლოკები -->
+    <section class="overview-grid">
+
+      <div class="panel statistics-panel">
+        <h3>Statistics</h3>
+
+        <div class="statistics-grid">
+
+          <div
+            class="stat-item"
+            *ngFor="let stat of statistics"
+          >
+            <div class="stat-icon" [ngClass]="stat.color">
+              {{ stat.icon }}
+            </div>
+
+            <div class="stat-info">
+              <strong>{{ stat.value }}</strong>
+              <span>{{ stat.title }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- შტამპების ტიპები -->
+      <div class="panel stamp-panel">
+        <h3>Stamp types</h3>
+
+        <div
+          class="stamp-row"
+          *ngFor="let stamp of stampTypes"
+        >
+          <span
+            class="stamp-dot"
+            [style.backgroundColor]="stamp.color"
+          ></span>
+
+          <span class="stamp-name">
+            {{ stamp.name }}
+          </span>
+
+          <strong>{{ stamp.percentage }}%</strong>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ბოლო სტუდენტები -->
+    <section class="recent-section">
+      <h2>Recent students</h2>
+
+      <div class="empty-state" *ngIf="recentStudents.length === 0">
+        No students yet — add one in the Students tab.
+      </div>
+
+      <div
+        class="student-row"
+        *ngFor="let student of recentStudents"
+      >
+        <div class="student-avatar">
+          {{ student.name.charAt(0) }}
+        </div>
+
+        <div class="student-info">
+          <strong>{{ student.name }}</strong>
+          <span>{{ student.email }}</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</div>

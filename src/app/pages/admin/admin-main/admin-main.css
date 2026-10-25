@@ -1,0 +1,678 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  color: #f5f6f8;
+  background: #08090b;
+  font-family: 'Primary', sans-serif;
+}
+
+.admin-panel {
+  display: flex;
+  min-height: 100vh;
+  background: #08090b;
+  padding: var(--page-padding);
+}
+
+.sidebar {
+  display: flex;
+  flex: 0 0 224px;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 24px 15px 16px;
+  background: #0e0f11;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 18px;
+  color: #f5f6f8;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.fa-passport {
+  width: 21px;
+  fill: none;
+  color: #27c8e8;
+
+}
+
+.role-label {
+  margin: 0 0 16px;
+  padding: 12px;
+  border-radius: 11px;
+  background: #17181a;
+  color: #898c94;
+  font-size: 12px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 41px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #8d9098;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: #191a1c;
+  color: #f5f6f8;
+}
+
+.nav-item.active {
+  box-shadow: inset 2px 0 #27c8e8;
+}
+
+.nav-icon {
+  display: inline-grid;
+  width: 16px;
+  place-items: center;
+  color: currentColor;
+  font-size: 17px;
+}
+
+.nav-count {
+  margin-left: auto;
+  color: #f5f6f8;
+  font-size: 11px;
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: auto;
+  padding: 16px 13px 12px;
+  border-radius: 13px;
+  background: #17181a;
+}
+
+.sidebar-bottom > span {
+  color: #8d9098;
+  font-size: 10px;
+}
+
+.sidebar-bottom > strong {
+  font-size: 20px;
+}
+
+.progress-track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #2b2d31;
+}
+
+.progress-track span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #27c8e8;
+}
+
+.logout-button {
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #a5a7ae;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+}
+
+.logout-button:hover {
+  color: #fff;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 30px 36px;
+}
+
+.issue-section {
+  max-width: 1240px;
+}
+
+.passport-search {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  margin: 24px 0 20px;
+  padding: 8px 14px 8px 18px;
+  border: 1px solid #25272b;
+  border-radius: 16px;
+  background: #17181a;
+}
+
+.passport-search > i {
+  color: #8d9098;
+  font-size: 14px;
+}
+
+.passport-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #f5f6f8;
+  font: inherit;
+  font-size: 12px;
+}
+
+.passport-search input::placeholder {
+  color: #858991;
+}
+
+.passport-search button,
+.add-stamp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 11px;
+  background: #27c8e8;
+  color: #071114;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  transition: filter 150ms ease;
+}
+
+.passport-search button:hover,
+.add-stamp-button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.issue-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(330px, 1fr);
+  align-items: stretch;
+  gap: 18px;
+}
+
+.student-stamps,
+.new-stamp {
+  border-radius: 17px;
+}
+
+.student-stamps-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.student-stamps-heading h2,
+.new-stamp h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.student-stamps-heading p {
+  margin: 8px 0 0;
+  color: #27c8e8;
+  font-size: 10px;
+}
+
+.passport-version {
+  color: #93969e;
+  font-size: 11px;
+}
+
+.issued-stamps {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.issued-stamp {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 13px;
+  background: #0b0c0e;
+}
+
+.issued-stamp > img {
+  width: 36px;
+  height: 42px;
+  flex: 0 0 36px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.issued-stamp-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.issued-stamp-info strong {
+  overflow: hidden;
+  color: #f1f2f4;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.issued-stamp-info span {
+  overflow: hidden;
+  color: #898c94;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-stamp {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #8d9098;
+  cursor: pointer;
+}
+
+.remove-stamp:hover {
+  background: rgb(255 133 133 / 12%);
+  color: #ff8585;
+}
+
+.new-stamp {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.stamp-type-options {
+  display: flex;
+  gap: 8px;
+  margin: 2px 0 4px;
+}
+
+.stamp-type-option {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.stamp-type-option.selected {
+  border: 2px solid #27c8e8;
+  box-shadow: 0 0 0 2px rgb(39 200 232 / 15%);
+}
+
+.stamp-type-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.new-stamp label {
+  margin-top: 3px;
+  color: #92959e;
+  font-size: 10px;
+}
+
+.new-stamp input,
+.new-stamp textarea {
+  width: 100%;
+  min-height: 39px;
+  padding: 9px 11px;
+  border: 1px solid #2a2c30;
+  border-radius: 9px;
+  outline: none;
+  background: #0a0b0d;
+  color: #f5f6f8;
+  font: inherit;
+  font-size: 12px;
+}
+
+.new-stamp textarea {
+  min-height: 66px;
+  resize: vertical;
+}
+
+.new-stamp input:focus,
+.new-stamp textarea:focus,
+.passport-search:focus-within {
+  border-color: #27c8e8;
+}
+
+.add-stamp-button {
+  width: 100%;
+  margin-top: 3px;
+}
+
+.add-stamp-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.form-message {
+  margin: 2px 0;
+  font-size: 11px;
+}
+
+.error-message {
+  color: #ff8585;
+}
+
+.success-message {
+  color: #79e4bd;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.main-content > h1 {
+  margin: 0 0 22px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 1fr);
+  gap: 17px;
+}
+
+.panel {
+  min-width: 0;
+  padding: 22px 19px;
+  border: 1px solid #222427;
+  border-radius: 16px;
+  background: #161719;
+}
+
+.panel h2,
+.recent-section h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 14px;
+  margin-top: 14px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stat-icon {
+  display: grid;
+  flex: 0 0 39px;
+  width: 39px;
+  height: 39px;
+  place-items: center;
+  border-radius: 50%;
+  color: #101114;
+  font-size: 18px;
+}
+
+.cyan {
+  background: #27c8e8;
+}
+
+.purple {
+  background: #8b78f5;
+}
+
+.green {
+  background: #79e4bd;
+}
+
+.pink {
+  background: #e98bdc;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.stat-info strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stat-info > span {
+  color: #858991;
+  font-size: 10px;
+}
+
+.stamp-panel h2 {
+  margin-bottom: 14px;
+}
+
+.stamp-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 27px;
+  font-size: 11px;
+}
+
+.stamp-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+}
+
+.stamp-pink {
+  background: #e98bdc;
+}
+
+.stamp-purple {
+  background: #8b78f5;
+}
+
+.stamp-cyan {
+  background: #27c8e8;
+}
+
+.stamp-name {
+  flex: 1;
+  color: #999ca4;
+}
+
+.stamp-row strong {
+  font-weight: 500;
+}
+
+.recent-section {
+  margin-top: 22px;
+}
+
+.recent-section h2 {
+  margin-bottom: 20px;
+}
+
+.empty-state {
+  color: #858991;
+  font-size: 11px;
+}
+
+.recent-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #222427;
+  border-radius: 12px;
+  background: #121315;
+}
+
+.recent-table {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.5fr) minmax(100px, 1fr) minmax(130px, 1fr) minmax(100px, 0.8fr);
+  align-items: center;
+  gap: 16px;
+  min-width: 560px;
+  padding: 14px 16px;
+}
+
+.recent-table-heading {
+  border-bottom: 1px solid #25272a;
+  color: #858991;
+  font-size: 10px;
+}
+
+.recent-student {
+  color: #dfe1e5;
+  font-size: 12px;
+}
+
+.recent-student-name {
+  font-weight: 600;
+}
+
+.recent-version,
+.recent-date {
+  color: #a1a4ab;
+}
+
+.passport-status {
+  justify-self: start;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+.status-active {
+  background: rgb(121 228 189 / 12%);
+  color: #79e4bd;
+}
+
+.status-pending {
+  background: rgb(255 193 92 / 12%);
+  color: #ffc15c;
+}
+
+.status-revoked {
+  background: rgb(255 105 105 / 12%);
+  color: #ff8585;
+}
+
+.nav-item:focus-visible,
+.logout-button:focus-visible,
+.brand:focus-visible {
+  outline: 2px solid #27c8e8;
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-panel {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .brand {
+    margin-bottom: 14px;
+  }
+
+  .role-label {
+    margin-bottom: 12px;
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .main-content {
+    padding: 23px 16px;
+  }
+
+  .passport-search {
+    gap: 10px;
+    padding-inline: 12px;
+  }
+
+  .passport-search button {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .statistics-grid {
+    grid-template-columns: 1fr;
+  }
+}

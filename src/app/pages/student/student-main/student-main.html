@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<main class="student-dashboard">
+  <header class="dashboard-header">
+    <div class="dashboard-intro">
+      <p class="eyebrow">YOUR LEARNING, VERIFIED.</p>
+      <div class="title-row">
+        <h1>My AI Skills Passport</h1>
+        <span class="demo-badge">BACHELOR STUDENT</span>
+      </div>
+      <p class="dashboard-description">A permanent record of your skills. A passport to what’s next.</p>
+    </div>
+
+    <div class="dashboard-actions">
+      <button
+        class="download-action"
+        type="button"
+        [disabled]="!isStudentLoggedIn"
+        [title]="isStudentLoggedIn ? 'Save your AI Skills Passport as a PDF' : 'Sign in to download your passport'"
+        (click)="passportViewer.downloadPdf()"
+      >
+        <i class="fa-solid fa-download" aria-hidden="true"></i>
+        Download PDF
+      </button>
+    </div>
+  </header>
+
+  <section class="passport-summary" aria-label="Passport summary">
+    <div class="student-identity">
+      <div class="student-avatar" aria-hidden="true">{{ studentInitials }}</div>
+      <div>
+        <h2>{{ passport.studentName }}</h2>
+        <p>Business and Technology University</p>
+      </div>
+    </div>
+
+    <div class="summary-item">
+      <p class="summary-label">PASSPORT ID</p>
+      <strong class="passport-id">{{ passport.id }}</strong>
+    </div>
+
+    <div class="summary-item">
+      <p class="summary-label">CURRENT VERSION</p>
+      <div class="version-value">
+        <strong>Version {{ passport.version }}</strong>
+        <span class="latest-badge">Latest</span>
+      </div>
+    </div>
+
+    <div class="summary-item">
+      <p class="summary-label">VERIFIED SKILLS</p>
+      <strong>{{ verifiedSkillCount }} skills earned</strong>
+    </div>
+
+    <div class="summary-item registry-status">
+      <p class="summary-label">REGISTRY STATUS</p>
+      <strong><i class="fa-regular fa-circle-check" aria-hidden="true"></i> {{ passport.status }}</strong>
+    </div>
+  </section>
+</main>
+
+<app-passport #passportViewer id="student-passport"></app-passport>
+
+<app-skill-badges (viewSkillset)="passportViewer.selectPage(2)"></app-skill-badges>
+
+<app-footer></app-footer>

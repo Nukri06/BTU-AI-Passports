@@ -1,0 +1,289 @@
+.student-dashboard {
+  padding: 124px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: 'Primary', sans-serif;
+
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  margin-bottom: 34px;
+}
+
+.dashboard-intro {
+  min-width: 0;
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.title-row h1 {
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.demo-badge {
+  padding: 5px 9px;
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.dashboard-description {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.download-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-black);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.download-action:hover:not(:disabled) {
+  background: #de2e66;
+  border-color: #ff38b9;
+}
+
+.download-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.passport-summary {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.5fr) repeat(4, minmax(120px, 1fr));
+  align-items: center;
+  min-height: 114px;
+  padding: 22px 28px;
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 5%);
+}
+
+.student-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-width: 0;
+  padding-right: 24px;
+}
+
+.student-avatar {
+  display: grid;
+  flex: 0 0 56px;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgb(254 1 126 / 18%);
+  border-radius: 50%;
+  background: rgb(254 1 126 / 10%);
+  color: var(--color-stamp-cyan);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.student-identity h2 {
+  color: var(--color-white);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.student-identity p {
+  margin-top: 7px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  gap: 12px;
+  min-width: 0;
+  padding: 0 22px;
+  border-left: 1px solid var(--color-dark);
+}
+
+.summary-label {
+  color: var(--color-text-muted);
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.summary-item > strong,
+.version-value strong {
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.passport-id {
+  font-family: 'Secondary', monospace;
+  letter-spacing: 0.025em;
+}
+
+.version-value {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.latest-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgb(22 134 83 / 18%);
+  color: #66eea8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.registry-status > strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #66eea8;
+}
+
+.registry-status i {
+  font-size: 15px;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .passport-summary {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: var(--space-5);
+  }
+
+  .student-identity {
+    grid-column: 1 / -1;
+    padding: 0 0 var(--space-4);
+    border-bottom: 1px solid var(--color-dark);
+  }
+
+  .summary-item:nth-child(2) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .student-dashboard {
+    padding: 108px 16px 24px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 24px;
+  }
+
+  .title-row h1 {
+    font-size: 30px;
+  }
+
+  .dashboard-actions {
+    width: 100%;
+  }
+
+  .verify-action,
+  .download-action {
+    flex: 1 1 0;
+    gap: 7px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .passport-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 18px;
+  }
+
+  .summary-item {
+    min-height: 68px;
+    padding: 0 12px;
+  }
+
+  .summary-item:nth-child(2),
+  .summary-item:nth-child(4) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .summary-item:nth-child(3),
+  .summary-item:nth-child(5) {
+    border-left: 1px solid var(--color-dark);
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .passport-summary {
+    padding: 14px;
+  }
+
+  .student-identity {
+    gap: 12px;
+  }
+
+  .student-avatar {
+    flex-basis: 46px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .summary-item {
+    padding-inline: 8px;
+  }
+}

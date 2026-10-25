@@ -1,1 +1,112 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/pages/student/passport/passport.css';
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Primary';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Secondary';
+  src: url('/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf') format('truetype');
+  font-display: swap;
+}
+
+
+:root {
+  /* Brand — ბრენდის ძირითადი ფერები */
+  --color-primary: #FE017E;
+  --color-primary-hover: #be2773;
+  --color-dark: #2D2D2D;
+  --color-black: #141414;
+  --color-darkBlack:#070707;
+  --color-bluishGrey:#0E0F12;
+  --color-white: #FFFFFF;
+
+  /* Backgrounds */
+  --color-bg: #F3F0F0;
+  --color-surface: #FFFFFF;
+  --color-card-border: #E2DFE5;
+
+  /* Text  */
+  --color-text: #000000;
+  --color-text-secondary: #464D51;
+  --color-text-muted: #847180;
+
+  /* Borders */
+  --color-border: #BFBFBF;
+  --color-border-light: #E2DFE5;
+
+  /* Skill ბაჯები */
+  --color-stamp-orange: #FF6A00;
+  --color-stamp-purple: #A009C4;
+  --color-stamp-red: #F84649;
+  --color-stamp-green: #66EEA8;
+  --color-stamp-cyan: #05D3ED;
+  --color-stamp-navy: #151B3E;
+  --color-stamp-pink: #FA776F;
+
+  /* Status colors */
+  --color-success: #168653;
+  --color-error: #D93025;
+  --color-warning: #FF6A00;
+
+  /*Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /*Layout */
+  --page-padding: 24px 128px;
+  --card-padding: 24px;
+  --element-gap: 16px;
+  --section-gap: 32px;
+
+  /*Borders and shadows */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-card: 0 4px 16px rgb(0 0 0 / 8%);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+.card {
+  padding: var(--card-padding);
+  border-radius: 12px;
+}
+
+
+@media (max-width: 768px) {
+  :root {
+    --page-padding: 16px;
+    --card-padding: 16px;
+    --section-gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-padding: 12px;
+    --card-padding: 12px;
+    --element-gap: 12px;
+  }
+}

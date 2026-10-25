@@ -1,0 +1,276 @@
+<section class="passport-viewer" aria-label="AI Skills Digital Passport">
+  <aside class="passport-sidebar" aria-label="Passport page navigation">
+    <div class="sidebar-heading">
+      <span>PASSPORT PAGES</span>
+    </div>
+
+    <nav class="page-navigation" aria-label="Passport pages">
+      @for (page of pages; track page.id; let index = $index) {
+        <button
+          type="button"
+          class="page-navigation-item"
+          [class.selected]="!showAllPages && currentPageIndex === index"
+          [attr.aria-current]="!showAllPages && currentPageIndex === index ? 'page' : null"
+          (click)="selectPage(index)"
+        >
+          <span class="page-thumbnail" aria-hidden="true">
+            <strong>AI SKILLS</strong>
+            <span class="thumbnail-mark" [class]="'thumbnail-mark mark-' + page.id"></span>
+          </span>
+          <span class="page-navigation-copy">
+            <span class="page-number">PAGE 0{{ index + 1 }}</span>
+            <span class="page-name">{{ page.title }}</span>
+          </span>
+        </button>
+      }
+    </nav>
+
+    <div class="sidebar-note">
+      <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+      <strong>Your ID stays with you.</strong>
+      <p>New skills. New versions.<br>One permanent Passport ID.</p>
+    </div>
+
+    <button
+      type="button"
+      class="view-all-button"
+      [attr.aria-pressed]="showAllPages"
+      (click)="toggleAllPages()"
+    >
+      <i class="fa-solid" [class.fa-grip]="!showAllPages" [class.fa-file-lines]="showAllPages" aria-hidden="true"></i>
+      {{ showAllPages ? 'Back to page view' : 'View all pages' }}
+    </button>
+  </aside>
+
+  <div class="passport-main">
+    <header class="viewer-toolbar">
+      <div class="toolbar-title">
+        <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+        <span>{{ showAllPages ? 'All passport pages' : pages[currentPageIndex].title }}</span>
+      </div>
+      <div class="page-controls">
+        <span>{{ showAllPages ? '04 PAGES' : pageCounter }}</span>
+        <button
+          type="button"
+          aria-label="Previous passport page"
+          [disabled]="showAllPages || currentPageIndex === 0"
+          (click)="previousPage()"
+        >
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          aria-label="Next passport page"
+          [disabled]="showAllPages || currentPageIndex === pages.length - 1"
+          (click)="nextPage()"
+        >
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="passport-canvas-area" [class.expanded-pages]="showAllPages">
+      @if (showAllPages) {
+        <div class="all-pages-stack" aria-label="All four passport pages">
+          @for (page of pages; track page.id; let index = $index) {
+            <article
+              class="passport-sheet"
+              [class.cover-sheet]="index === 0"
+              [attr.aria-label]="'Page 0' + (index + 1) + ': ' + page.title"
+            >
+              <ng-container
+                [ngTemplateOutlet]="passportPage"
+                [ngTemplateOutletContext]="{ pageIndex: index }"
+              ></ng-container>
+            </article>
+          }
+        </div>
+      } @else {
+        <article class="passport-sheet" [class.cover-sheet]="currentPageIndex === 0">
+          <ng-container
+            [ngTemplateOutlet]="passportPage"
+            [ngTemplateOutletContext]="{ pageIndex: currentPageIndex }"
+          ></ng-container>
+        </article>
+      }
+
+      <ng-template #passportPage let-pageIndex="pageIndex">
+          @switch (pageIndex) {
+            @case (0) {
+              <div class="cover-content">
+                <header class="cover-heading">
+                  <h2>AI SKILLS</h2>
+                  <p>DIGITAL PASSPORT</p>
+                  <span class="cover-stars" aria-hidden="true">✱<br>✱<br>✱</span>
+                </header>
+
+                <div class="cover-student">
+                  <div class="cover-name">
+                    <strong>NAME:</strong>
+                    <span>JOHN</span>
+                    <strong>SURNAME:</strong>
+                    <span>DOE</span>
+                  </div>
+                  <div class="cover-date">
+                    <strong>DATE OF ISSUE:</strong>
+                    <span>12 Mar 2026</span>
+                    <small>PERMANENT PASSPORT ID</small>
+                    <span>BTU-AI-0001</span>
+                  </div>
+                </div>
+
+                <div class="cover-stamps" aria-label="Passport verification stamps">
+                  <img class="cover-issued" src="/assets/3_1@3x.png" alt="Issued by Business and Technology University">
+                  <img class="cover-recognition" src="/assets/4_1@3x.png" alt="AI skills international recognition">
+                  <img class="cover-passport-stamp" src="/assets/2_1@3x.png" alt="AI Skills Digital Passport">
+                  <img class="cover-blockchain" src="/assets/1_1@3x.png" alt="Blockchain verified">
+                  <img class="cover-latest" src="/assets/5_1@3x.png" alt="Latest AI skillset">
+                </div>
+
+                <footer class="sheet-footer cover-footer">
+                  <span class="passport-label">AI SKILLS<br><strong>DIGITAL PASSPORT</strong></span>
+                  <img class="btu-logo" src="/BTU-logo.png" alt="Business and Technology University">
+                  <span class="passport-id-label">PASSPORT ID: BTU-AI-0001</span>
+                </footer>
+              </div>
+            }
+            @case (1) {
+              <div class="about-page">
+                <section class="about-copy">
+                  <h2>ABOUT<br>THE AI SKILLS</h2>
+                  <p class="about-subtitle">DIGITAL PASSPORT</p>
+                  <p>
+                    The BTU AI Skills Digital Passport is your personalized and evolving record of
+                    competencies developed through your university and professional experience.
+                  </p>
+                  <p>
+                    AI Skill Stamps may be earned through eligible academic courses, workshops,
+                    masterclasses, hackathons, intensive programs, guest speaker sessions, and other
+                    AI-related learning experiences.
+                  </p>
+                  <p>
+                    Participation in the Passport is voluntary. There is no required number or
+                    combination of stamps and no predefined pathway. Students select learning
+                    opportunities according to their interests and skills.
+                  </p>
+                  <p>
+                    As new competencies are developed and recognized, additional stamps are added
+                    to the Passport, progressively creating an individual competency profile.
+                  </p>
+                  <span class="about-stars" aria-hidden="true">✱ ✱ ✱ ✱ ✱ ✱</span>
+                </section>
+
+                <section class="stamp-guide">
+                  <h2>UNDERSTANDING AI SKILLS STAMPS</h2>
+                  <div class="stamp-guide-grid">
+                    <article>
+                      <h3>AI SKILL</h3>
+                      <span>FOCUSED LEARNING</span>
+                      <img src="/assets/Artboard%203%20(2).png" alt="AI focused learning stamp">
+                      <p>Awarded through an eligible AI-focused learning experience, such as a workshop, masterclass, seminar, or guest speaker session.</p>
+                      <strong>Represents:</strong> Development of a defined AI competency.
+                    </article>
+                    <article>
+                      <h3>AI APPLIED SKILL</h3>
+                      <span>APPLIED LEARNING</span>
+                      <img src="/assets/Artboard%204%20(1).png" alt="AI applied learning stamp">
+                      <p>Awarded through an eligible extended practical learning experience, typically involving a challenge, project, hackathon, or internship.</p>
+                      <strong>Represents:</strong> Hands-on application of a defined AI competency.
+                    </article>
+                    <article>
+                      <h3>AI ADVANCED SKILL</h3>
+                      <span>EXTENDED ACADEMIC LEARNING</span>
+                      <img src="/assets/Artboard%205%20(1).png" alt="AI advanced skill stamp">
+                      <p>Awarded through the successful completion of an eligible semester-long academic course in which AI competency is a defined assessed component.</p>
+                      <strong>Represents:</strong> Extended and formally assessed development of an AI competency.
+                    </article>
+                    <article class="passport-growth">
+                      <h3>HOW THE<br>PASSPORT GROWS</h3>
+                      <p><i class="fa-solid fa-book-open"></i> LEARN</p>
+                      <p><i class="fa-solid fa-lightbulb"></i> DEMONSTRATE</p>
+                      <p><i class="fa-solid fa-award"></i> EARN</p>
+                      <p><i class="fa-solid fa-shield-halved"></i> VERIFY</p>
+                      <p><i class="fa-solid fa-user"></i> BUILD YOUR AI PROFILE</p>
+                    </article>
+                  </div>
+                  <aside class="important-note">
+                    <strong>IMPORTANT</strong>
+                    <p>The three stamp types represent different learning formats and depths of engagement. They do not constitute a mandatory sequence.</p>
+                  </aside>
+                </section>
+                <footer class="sheet-page-id">PASSPORT ID: BTU-AI-0001</footer>
+              </div>
+            }
+            @case (2) {
+              <div class="skills-page">
+                <header class="sheet-heading">
+                  <h2>VERIFIED AI SKILLSET</h2>
+                  <p>Collection of BTU-verified AI Skill Stamps · Demo record</p>
+                </header>
+                <div class="achievement-grid">
+                  @for (achievement of achievements; track achievement.skill) {
+                    <article class="achievement-card">
+                      <span class="earned-date">{{ achievement.date }}</span>
+                      <img [src]="achievement.stamp" [alt]="achievement.stampAlt">
+                      <strong>{{ achievement.skill }}</strong>
+                      <span>{{ achievement.type }}</span>
+                    </article>
+                  }
+                  @for (emptySlot of emptyAchievementSlots; track emptySlot) {
+                    <div class="achievement-card empty-achievement" aria-label="Future achievement slot"></div>
+                  }
+                </div>
+                <footer class="sheet-footer">
+                  <span class="passport-label">AI SKILLS<br><strong>DIGITAL PASSPORT</strong></span>
+                  <img class="btu-logo" src="/BTU-logo.png" alt="Business and Technology University">
+                  <span class="passport-id-label">PASSPORT ID: BTU-AI-0001</span>
+                </footer>
+              </div>
+            }
+            @case (3) {
+              <div class="details-page">
+                <header class="sheet-heading">
+                  <h2>AI SKILLS DETAILED INFORMATION</h2>
+                  <p>Detailed record of AI skills and learning experiences</p>
+                </header>
+                <div class="achievement-table-wrap">
+                  <table class="achievement-table">
+                    <thead>
+                      <tr>
+                        <th>STAMP TYPE</th>
+                        <th>SKILL</th>
+                        <th>DESCRIPTION</th>
+                        <th>EARNED THROUGH</th>
+                        <th>DATE EARNED</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (achievement of achievements; track achievement.skill) {
+                        <tr>
+                          <td><img [src]="achievement.stamp" [alt]="achievement.stampAlt"></td>
+                          <td><strong>{{ achievement.skill }}</strong></td>
+                          <td>{{ achievement.description }}</td>
+                          <td>{{ achievement.earnedThrough }}</td>
+                          <td>{{ achievement.date }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                <footer class="sheet-footer">
+                  <span class="passport-id-label">PASSPORT ID: BTU-AI-0001</span>
+                  <span class="passport-label">AI SKILLS<br><strong>DIGITAL PASSPORT</strong></span>
+                  <img class="btu-logo" src="/BTU-logo.png" alt="Business and Technology University">
+                </footer>
+              </div>
+            }
+          }
+      </ng-template>
+    </div>
+
+    <footer class="viewer-footer">
+      <span><i class="fa-regular fa-clock" aria-hidden="true"></i> Last updated 18 Sept 2026</span>
+      <span>DEMO DOCUMENT </span>
+    </footer>
+  </div>
+</section>

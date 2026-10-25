@@ -1,0 +1,250 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="admin-panel">
+  <aside class="sidebar" aria-label="Admin navigation">
+    <a class="brand" routerLink="/admin/admin-main">
+      <i class="fa-solid fa-passport"></i>
+      <span>BTU Passport</span>
+    </a>
+
+    <p class="role-label">Admin Panel</p>
+
+    <nav class="navigation" aria-label="Admin sections">
+      <button
+        class="nav-item"
+        [class.active]="activeSection() === 'dashboard'"
+        [attr.aria-current]="activeSection() === 'dashboard' ? 'page' : null"
+        type="button"
+        (click)="showSection('dashboard')"
+      >
+        <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>
+        <span>Dashboard</span>
+      </button>
+      <button
+        class="nav-item"
+        [class.active]="activeSection() === 'issue-stamps'"
+        [attr.aria-current]="activeSection() === 'issue-stamps' ? 'page' : null"
+        type="button"
+        (click)="showSection('issue-stamps')"
+      >
+        <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-stamp"></i></span>
+        <span>Issue stamps</span>
+      </button>
+      <button class="nav-item" type="button">
+        <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span>Students</span>
+        <span class="nav-count">{{ statistics()[0].value }}</span>
+      </button>
+      <button class="nav-item" type="button">
+        <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></span>
+        <span>Staff access</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <span>Stamps issued</span>
+      <strong>{{ statistics()[1].value }}</strong>
+      <div class="progress-track" [attr.aria-label]="statistics()[1].value + ' stamps issued'">
+        <span [style.width.%]="statistics()[1].value ? 100 : 0"></span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    @if (activeSection() === 'dashboard') {
+    <h1>Overview</h1>
+
+    <section class="overview-grid" aria-label="Dashboard overview">
+      <article class="panel statistics-panel">
+        <h2>Statistics</h2>
+        <div class="statistics-grid">
+          @for (stat of statistics(); track stat.title) {
+            <div class="stat-item">
+              <span class="stat-icon" [class]="stat.color" aria-hidden="true">{{ stat.icon }}</span>
+              <span class="stat-info">
+                <strong>{{ stat.value }}</strong>
+                <span>{{ stat.title }}</span>
+              </span>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="panel stamp-panel">
+        <h2>Stamp types</h2>
+        @for (stamp of stampTypes(); track stamp.name) {
+          <div class="stamp-row">
+            <span class="stamp-dot" [class]="stamp.color" aria-hidden="true"></span>
+            <span class="stamp-name">{{ stamp.name }}</span>
+            <strong>{{ stamp.percentage }}%</strong>
+          </div>
+        }
+      </article>
+    </section>
+
+    <section class="recent-section" aria-labelledby="recent-students-heading">
+      <h2 id="recent-students-heading">Recent students</h2>
+      @if (recentPassports().length === 0) {
+        <p class="empty-state">No passports have been issued yet.</p>
+      } @else {
+        <div class="recent-table-wrap">
+          <div class="recent-table recent-table-heading" aria-hidden="true">
+            <span>Student</span>
+            <span>Version</span>
+            <span>Issue date</span>
+            <span>Status</span>
+          </div>
+          @for (passport of recentPassports(); track passport.id) {
+            <article class="recent-table recent-student">
+              <strong class="recent-student-name">{{ passport.studentName }}</strong>
+              <span class="recent-version">Version {{ passport.version }}</span>
+              <time class="recent-date" [attr.datetime]="passport.issuedAt">
+                {{ passport.issuedAt | date: 'd MMM yyyy' }}
+              </time>
+              <span class="passport-status" [class]="'status-' + passport.status.toLowerCase()">
+                {{ passport.status }}
+              </span>
+            </article>
+          }
+        </div>
+      }
+    </section>
+    } @else {
+      <section class="issue-section" aria-labelledby="issue-heading">
+        <h1 id="issue-heading">Issue stamps</h1>
+
+        <form class="passport-search" (ngSubmit)="findPassport()">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label class="visually-hidden" for="passport-lookup">Student or passport ID</label>
+          <input
+            id="passport-lookup"
+            type="search"
+            name="passportLookup"
+            placeholder="Enter student / Passport ID, e.g. BTU-AI-0001"
+            [value]="searchQuery()"
+            (input)="updateSearchQuery($event)"
+          >
+          <button type="submit">Find</button>
+        </form>
+
+        @if (searchMessage()) {
+          <p class="form-message error-message" role="alert">{{ searchMessage() }}</p>
+        }
+
+        @if (foundPassport(); as passport) {
+          <div class="issue-content">
+            <section class="student-stamps panel" aria-label="Student passport stamps">
+              <header class="student-stamps-heading">
+                <div>
+                  <h2>{{ passport.studentName }}</h2>
+                  <p>{{ passport.id }}</p>
+                </div>
+                <span class="passport-version">Version {{ passport.version }}</span>
+              </header>
+
+              @if (passport.stamps.length === 0) {
+                <p class="empty-state">This passport has no stamps yet.</p>
+              } @else {
+                <ul class="issued-stamps">
+                  @for (stamp of passport.stamps; track stamp.id) {
+                    <li class="issued-stamp">
+                      <img
+                        [src]="stampImage(stamp.type)"
+                        [alt]="stamp.type"
+                      >
+                      <div class="issued-stamp-info">
+                        <strong>{{ stamp.skillName }}</strong>
+                        <span>{{ stamp.issuedAt | date: 'yyyy-MM-dd' }} · {{ stamp.earnedThrough }}</span>
+                      </div>
+                      <button
+                        class="remove-stamp"
+                        type="button"
+                        [attr.aria-label]="'Remove ' + stamp.skillName"
+                        (click)="removeStamp(passport.id, stamp.id)"
+                      >
+                        <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+                      </button>
+                    </li>
+                  }
+                </ul>
+              }
+            </section>
+
+            <form class="new-stamp panel" (ngSubmit)="addStamp()">
+              <h2>New stamp</h2>
+              <div class="stamp-type-options" role="group" aria-label="Stamp type">
+                @for (stamp of stampTypes(); track stamp.name) {
+                  <button
+                    class="stamp-type-option"
+                    [class.selected]="selectedStampType() === stamp.name"
+                    type="button"
+                    [attr.aria-pressed]="selectedStampType() === stamp.name"
+                    [attr.aria-label]="stamp.name"
+                    (click)="selectStampType(stamp.name)"
+                  >
+                    <img [src]="stamp.image" [alt]="stamp.name">
+                  </button>
+                }
+              </div>
+
+              <label for="skill-name">Skill name</label>
+              <input
+                id="skill-name"
+                type="text"
+                name="skillName"
+                [value]="stampForm.skillName"
+                (input)="updateStampField('skillName', $event)"
+                required
+              >
+
+              <label for="earned-through">Earned through</label>
+              <input
+                id="earned-through"
+                type="text"
+                name="earnedThrough"
+                [value]="stampForm.earnedThrough"
+                (input)="updateStampField('earnedThrough', $event)"
+                required
+              >
+
+              <label for="stamp-description">Description</label>
+              <textarea
+                id="stamp-description"
+                name="description"
+                [value]="stampForm.description"
+                (input)="updateStampField('description', $event)"
+                required
+              ></textarea>
+
+              <label for="stamp-date">Date</label>
+              <input
+                id="stamp-date"
+                type="date"
+                name="issuedAt"
+                [value]="stampForm.issuedAt"
+                (input)="updateStampField('issuedAt', $event)"
+                required
+              >
+
+              @if (submitMessage()) {
+                <p
+                  class="form-message"
+                  [class.success-message]="submitMessage() === 'Stamp issued successfully.'"
+                  [class.error-message]="submitMessage() !== 'Stamp issued successfully.'"
+                  role="status"
+                >
+                  {{ submitMessage() }}
+                </p>
+              }
+
+              <button class="add-stamp-button" type="submit" [disabled]="!isStampFormValid">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                Add stamp
+              </button>
+            </form>
+          </div>
+        }
+      </section>
+    }
+  </main>
+</div>

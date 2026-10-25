@@ -1,0 +1,114 @@
+/* სექციის ზოგადი კონტეინერი */
+.logIn {
+  font-family: 'Primary', sans-serif;
+  background-color: var(--color-bg);
+  min-height: calc(100vh - 70px); /* ნავიგაციის გამოკლებით */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--page-padding);
+}
+
+/* ფორმის კარტა */
+.logIn form {
+  background-color: var(--color-surface);
+  padding: var(--card-padding);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-card-border);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--element-gap);
+}
+
+/* ლეიბლები */
+.logIn label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+/* ინპუტები */
+.logIn input {
+  width: 100%;
+  padding: 12px var(--space-4);
+  font-family: 'Primary', sans-serif;
+  font-size: 15px;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.logIn input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(254, 1, 126, 0.15);
+}
+
+.logIn input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* სატესტო კოდის ტექსტი */
+.logIn p:not(.error-message) {
+  font-size: 13px;
+  color: var(--color-stamp-orange);
+  background-color: rgba(255, 106, 0, 0.08);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ძირითადი ღილაკი (კოდის მიღება / დადასტურება) */
+.logIn button[type="submit"] {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px var(--space-4);
+  font-family: 'Primary', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: var(--space-1);
+}
+
+.logIn button[type="submit"]:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* უკან დაბრუნების ღილაკი */
+.logIn button[type="button"] {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px var(--space-4);
+  font-family: 'Primary', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logIn button[type="button"]:hover {
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+  border-color: var(--color-border-light);
+}
+
+/* შეცდომის მესიჯი */
+.error-message {
+  margin-top: var(--space-3);
+  font-size: 14px;
+  color: var(--color-error);
+  text-align: center;
+  font-weight: 500;
+}
